@@ -21,7 +21,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - uses: whiteducksoftware/azure-arm-action-js@v1
       with:
-        resourceGroupName: GitHubActions
+        resourceGroupName: APIM-Southeast-Asia
         templateLocation: 101-api-management-create-with-msi/azuredeploy.json
         deploymentName: APIM-Southeast-Asia
         deploymentMode: Complete
