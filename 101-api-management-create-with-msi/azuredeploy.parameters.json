@@ -7,6 +7,15 @@
         },
         "publisherName": {
             "value": "templateTest"
+        },
+        "location": {
+            "value": "Southeast Asia"
+        },
+        "sku": {
+            "value": "Consumption"
+        },
+        "skuCount": {
+            "value": 0
         }
     }
 }
