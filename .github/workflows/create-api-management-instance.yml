@@ -16,17 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - uses: whiteducksoftware/azure-arm-action@v2.2
+    - uses: azure/login@v1
       with:
-        # Paste output of `az ad sp create-for-rbac -o json` as value of secret variable: AZURE_CREDENTIALS
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-        # Provide the name of a resource group.
-        resourceGroupName: APIM-instance-southeastasia
-        # Specify the path to the Azure Resource Manager template.
+    - uses: whiteducksoftware/azure-arm-action-js@v1
+      with:
+        resourceGroupName: APIM-southeastasia
         templateLocation: 101-api-management-create-with-msi/azuredeploy.json
-        # Specifies the name of the resource group deployment to create.
         deploymentName: APIM-Southeast-Asia
-        # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group).
-        deploymentMode: Incremental # optional, default is Incremental
-        # Specify the path to the Azure Resource Manager parameters file.
+        deploymentMode: Complete
         parametersLocation: 101-api-management-create-with-msi/azuredeploy.parameters.json
