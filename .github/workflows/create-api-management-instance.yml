@@ -25,4 +25,4 @@ jobs:
         templateLocation: 101-api-management-create-with-msi/azuredeploy.json
         deploymentName: APIM-Southeast-Asia
         deploymentMode: Complete
-        parametersLocation: 101-api-management-create-with-msi/azuredeploy.parameters.json
+        parameters: 101-api-management-create-with-msi/azuredeploy.parameters.json
