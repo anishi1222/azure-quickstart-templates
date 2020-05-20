@@ -23,14 +23,14 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: Run Az CLI script
-      run: |
-        az group create -l $Location -n $ResourceGroup
-
     - name: Login via Az module
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Run Az CLI script
+      run: |
+        az group create -l $Location -n $ResourceGroup
 
     - name: Create API Management Instance with ARM action js
       uses: whiteducksoftware/azure-arm-action-js@v1
