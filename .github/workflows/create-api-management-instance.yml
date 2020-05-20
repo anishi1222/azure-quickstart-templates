@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Azure API Management Instance Creation
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -19,15 +19,20 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    # Runs deploy ARM template
+    - name: Azure Resource Manager (ARM) Template Deployment
+    - uses: whiteducksoftware/azure-arm-action@v2.2
+    - uses: actions/checkout@master
+      with:
+        # Paste output of `az ad sp create-for-rbac -o json` as value of secret variable: AZURE_CREDENTIALS
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        # Provide the name of a resource group.
+        resourceGroupName: APIM-instance-southeastasia
+        # Specify the path to the Azure Resource Manager template.
+        templateLocation: https://raw.githubusercontent.com/anishi1222/azure-quickstart-templates/master/101-api-management-create-with-msi/azuredeploy.json
+        # Specifies the name of the resource group deployment to create.
+        deploymentName: APIM-Southeast-Asia
+        # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group).
+        deploymentMode: Incremental # optional, default is Incremental
+        # Specify the path to the Azure Resource Manager parameters file.
+        parametersLocation: https://raw.githubusercontent.com/anishi1222/azure-quickstart-templates/master/101-api-management-create-with-msi/azuredeploy.parameters.json
