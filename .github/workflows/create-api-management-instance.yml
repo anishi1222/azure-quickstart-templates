@@ -23,10 +23,10 @@ jobs:
         # Provide the name of a resource group.
         resourceGroupName: APIM-instance-southeastasia
         # Specify the path to the Azure Resource Manager template.
-        templateLocation: https://raw.githubusercontent.com/anishi1222/azure-quickstart-templates/master/101-api-management-create-with-msi/azuredeploy.json
+        templateLocation: 101-api-management-create-with-msi/azuredeploy.json
         # Specifies the name of the resource group deployment to create.
         deploymentName: APIM-Southeast-Asia
         # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group).
         deploymentMode: Incremental # optional, default is Incremental
         # Specify the path to the Azure Resource Manager parameters file.
-        parametersLocation: https://raw.githubusercontent.com/anishi1222/azure-quickstart-templates/master/101-api-management-create-with-msi/azuredeploy.parameters.json
+        parametersLocation: 101-api-management-create-with-msi/azuredeploy.parameters.json
