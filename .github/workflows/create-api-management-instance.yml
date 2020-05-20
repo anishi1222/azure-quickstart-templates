@@ -10,19 +10,33 @@ on:
   pull_request:
     branches: [ master ]
 
+# environment variable
+env:
+  ResourceGroup: APIM-Southeast-Asia
+  Location: southeastasia
+  DeploymentName: APIM-SEA
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - uses: azure/login@v1
+
+    - name: Run Az CLI script
+      run: |
+        az group create -l $Location -n $ResourceGroup
+
+    - name: Login via Az module
+      uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - uses: whiteducksoftware/azure-arm-action-js@v1
+
+    - name: Create API Management Instance with ARM action js
+      uses: whiteducksoftware/azure-arm-action-js@v1
       with:
-        resourceGroupName: APIM-Southeast-Asia
+        resourceGroupName: $ResourceGroup
         templateLocation: 101-api-management-create-with-msi/azuredeploy.json
-        deploymentName: APIM-Southeast-Asia
+        deploymentName: $DeploymentName
         deploymentMode: Complete
         parameters: 101-api-management-create-with-msi/azuredeploy.parameters.json
