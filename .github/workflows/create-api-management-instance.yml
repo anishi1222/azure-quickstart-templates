@@ -19,10 +19,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: actions/checkout@master
+
     # Runs deploy ARM template
     - name: Azure Resource Manager (ARM) Template Deployment
     - uses: whiteducksoftware/azure-arm-action@v2.2
-    - uses: actions/checkout@master
       with:
         # Paste output of `az ad sp create-for-rbac -o json` as value of secret variable: AZURE_CREDENTIALS
         creds: ${{ secrets.AZURE_CREDENTIALS }}
