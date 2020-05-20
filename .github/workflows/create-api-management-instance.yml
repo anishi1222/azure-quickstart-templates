@@ -30,13 +30,13 @@ jobs:
 
     - name: Run Az CLI script
       run: |
-        az group create -l ${Location} -n ${ResourceGroup}
+        az group create -l ${Location} -n $ResourceGroup
 
     - name: Create API Management Instance with ARM action js
       uses: whiteducksoftware/azure-arm-action-js@v1
       with:
-        resourceGroupName: ${ResourceGroup}
+        resourceGroupName: ${{ResourceGroup}}
         templateLocation: 101-api-management-create-with-msi/azuredeploy.json
-        deploymentName: ${DeploymentName}
+        deploymentName: ${{DeploymentName}}
         deploymentMode: Complete
         parameters: 101-api-management-create-with-msi/azuredeploy.parameters.json
